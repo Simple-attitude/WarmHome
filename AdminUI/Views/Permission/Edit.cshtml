@@ -1,0 +1,63 @@
+﻿@model WarmHome.DTO.PermissionDTO
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="ok-body">
+    <!--form表单-->
+    <form class="layui-form ok-form">
+        <input type="hidden" name="id"  autocomplete="off" class="layui-input"
+               value="@Model.Id" lay-verify="required" disabled>
+        <div class="layui-form-item">
+            <label class="layui-form-label">权限项名</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" placeholder="请输入权限项名" autocomplete="off" class="layui-input"
+                       value="@Model.Name" lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <input type="text" name="desc" placeholder="请输入备注" autocomplete="off" class="layui-input"
+                       value="@Model.Description" lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="edit">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--js逻辑-->
+@section Scripts{
+    <script>
+        layui.config({
+            base: ''
+        }).extend({
+            authtree: 'authtree',
+        });
+
+        layui.use(["element", "form", "laydate", "okLayer", "okUtils"], function () {
+            let form = layui.form;
+            let laydate = layui.laydate;
+            let okLayer = layui.okLayer;
+            let okUtils = layui.okUtils;
+            okLoading.close();
+            form.on("submit(edit)", function (data) {
+                okUtils.ajax("/Permission/Edit", "post", data.field, true).done(function (response) {
+                    console.log(response);
+                    okLayer.greenTickMsg("编辑成功", function () {
+                        parent.layer.close(parent.layer.getFrameIndex(window.name));
+                    });
+                }).fail(function (error) {
+                    console.log(error)
+                });
+                return false;
+            });
+        })
+    </script>
+    }

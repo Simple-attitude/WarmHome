@@ -1,0 +1,973 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A9AD9BC9-762C-41D8-9822-A50F25DDB871}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AdminUI</RootNamespace>
+    <AssemblyName>AdminUI</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="aliyun-net-sdk-afs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\aliyun-net-sdk-afs.dll</HintPath>
+    </Reference>
+    <Reference Include="aliyun-net-sdk-core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\aliyun-net-sdk-core.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac, Version=5.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.5.0.0\lib\net461\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.5.0.0\lib\net461\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="CaptchaGen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CaptchaGen.1.0.0\lib\net40\CaptchaGen.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="css\common.css" />
+    <Content Include="css\gulpfile.js" />
+    <Content Include="css\okadmin.animate.css" />
+    <Content Include="css\okadmin.css" />
+    <Content Include="css\okadmin.theme.css" />
+    <Content Include="css\oksub.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="images\avatar.png" />
+    <Content Include="images\code.jpg" />
+    <Content Include="images\face.jpg" />
+    <Content Include="images\favicon.ico" />
+    <Content Include="images\home-01.png" />
+    <Content Include="images\home-02.png" />
+    <Content Include="images\home-03.png" />
+    <Content Include="images\home-04.png" />
+    <Content Include="images\login-bg.jpg" />
+    <Content Include="images\Login-bg1.jpg" />
+    <Content Include="images\loginbg.jpg" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\qq.jpeg" />
+    <Content Include="images\qq1.png" />
+    <Content Include="images\qq2.png" />
+    <Content Include="images\qq3.png" />
+    <Content Include="images\qq4.png" />
+    <Content Include="images\wallpaper\29bce2d5cf30fc96866dcb5e287661ea.jpg" />
+    <Content Include="images\wallpaper\3fded2e777723f145a4773dfdb68a9e3.jpg" />
+    <Content Include="images\wallpaper\9f28afe0e71b3ba8778e307bea2f006d.jpg" />
+    <Content Include="images\wallpaper\9f28afe0e71b3ba8778e307bea2f006K.jpg" />
+    <Content Include="images\wallpaper\b390e4c33b7d656f09dc7fd155759a4f.jpg" />
+    <Content Include="images\wallpaper\b4b55f8ec6b2763a737a2d6e1c50b71e.jpg" />
+    <Content Include="images\wallpaper\b8df65c6452dcf8b0302b8bfce9e7ec9.jpg" />
+    <Content Include="images\wallpaper\e1739f3b0f386e719bd4b4503fd3cc3a.jpg" />
+    <Content Include="images\wx.jpg" />
+    <Content Include="images\zfb.jpg" />
+    <Content Include="js\chartArea.js" />
+    <Content Include="js\console.js" />
+    <Content Include="js\console1.js" />
+    <Content Include="js\echartsData.js" />
+    <Content Include="js\home2Data-del.js" />
+    <Content Include="js\jquery-3.3.1.js" />
+    <Content Include="js\okadmin.js" />
+    <Content Include="js\okconfig.js" />
+    <Content Include="js\snowflake.js" />
+    <Content Include="lib\echarts\echarts.min.js" />
+    <Content Include="lib\echarts\echarts.theme.js" />
+    <Content Include="lib\echarts\echarts.themez.js" />
+    <Content Include="lib\echarts\world\js\china-contour.js" />
+    <Content Include="lib\echarts\world\js\china.js" />
+    <Content Include="lib\echarts\world\js\province\anhui.js" />
+    <Content Include="lib\echarts\world\js\province\aomen.js" />
+    <Content Include="lib\echarts\world\js\province\beijing.js" />
+    <Content Include="lib\echarts\world\js\province\chongqing.js" />
+    <Content Include="lib\echarts\world\js\province\fujian.js" />
+    <Content Include="lib\echarts\world\js\province\gansu.js" />
+    <Content Include="lib\echarts\world\js\province\guangdong.js" />
+    <Content Include="lib\echarts\world\js\province\guangxi.js" />
+    <Content Include="lib\echarts\world\js\province\guizhou.js" />
+    <Content Include="lib\echarts\world\js\province\hainan.js" />
+    <Content Include="lib\echarts\world\js\province\hebei.js" />
+    <Content Include="lib\echarts\world\js\province\heilongjiang.js" />
+    <Content Include="lib\echarts\world\js\province\henan.js" />
+    <Content Include="lib\echarts\world\js\province\hubei.js" />
+    <Content Include="lib\echarts\world\js\province\hunan.js" />
+    <Content Include="lib\echarts\world\js\province\jiangsu.js" />
+    <Content Include="lib\echarts\world\js\province\jiangxi.js" />
+    <Content Include="lib\echarts\world\js\province\jilin.js" />
+    <Content Include="lib\echarts\world\js\province\liaoning.js" />
+    <Content Include="lib\echarts\world\js\province\neimenggu.js" />
+    <Content Include="lib\echarts\world\js\province\ningxia.js" />
+    <Content Include="lib\echarts\world\js\province\qinghai.js" />
+    <Content Include="lib\echarts\world\js\province\shandong.js" />
+    <Content Include="lib\echarts\world\js\province\shanghai.js" />
+    <Content Include="lib\echarts\world\js\province\shanxi.js" />
+    <Content Include="lib\echarts\world\js\province\shanxi1.js" />
+    <Content Include="lib\echarts\world\js\province\sichuan.js" />
+    <Content Include="lib\echarts\world\js\province\taiwan.js" />
+    <Content Include="lib\echarts\world\js\province\tianjin.js" />
+    <Content Include="lib\echarts\world\js\province\xianggang.js" />
+    <Content Include="lib\echarts\world\js\province\xinjiang.js" />
+    <Content Include="lib\echarts\world\js\province\xizang.js" />
+    <Content Include="lib\echarts\world\js\province\yunnan.js" />
+    <Content Include="lib\echarts\world\js\province\zhejiang.js" />
+    <Content Include="lib\echarts\world\js\world.js" />
+    <Content Include="lib\fonts\demo.css" />
+    <Content Include="lib\fonts\iconfont.css" />
+    <Content Include="lib\fonts\iconfont.js" />
+    <Content Include="lib\fonts\iconfont.svg" />
+    <Content Include="lib\jquery.bsgrid\builds\css\form.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\css\grid.extend.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\css\grid.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\css\grid.paging.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\css\icon.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\css\skins\grid_access.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\css\skins\grid_blue.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\css\skins\grid_bootstrap.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\css\skins\grid_easyui.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\css\skins\grid_flexigrid.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\css\skins\grid_gray.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\css\skins\grid_jqgrid.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\css\skins\grid_pure_gray.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\css\skins\grid_sky_blue.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\arrow-refresh.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\configure-2.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\dialog-accept-2.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\document-print-2.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\document-save-6.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\documentation.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\download.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\edit-copy-7.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\edit-cut-7.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\edit-delete-6.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\edit-delete-7.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\edit-find-8.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\edit-paste-7.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\flag.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\help-about-3.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\help.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\list-add-6.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\mail-generic.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\mimetypes\silk_style\page-white_acrobat.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\mimetypes\silk_style\page-white_excel.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\mimetypes\silk_style\page-white_text.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\mimetypes\silk_style\page-white_word.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\page-edit.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\paging\go-first-view.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\paging\go-jump-2.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\paging\go-last-view.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\paging\go-next-view.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\paging\go-previous-view.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\paging\view-refresh-3.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\sort-view.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\system-config-boot.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\system-search-6.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\view-list-details-5.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\view-sort-ascending-2.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\view-sort-descending-2.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\window-close-4.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\window-close.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\loading.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\access\bg.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\blue\bg.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\bootstrap\glyphicons-halflings.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\default\bg.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\easyui\bg.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\easyui\layout_button_right.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\easyui\pagination_first.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\easyui\pagination_last.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\easyui\pagination_load.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\easyui\pagination_next.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\easyui\pagination_prev.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\flexigrid\bg.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\gray\bg.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\jqgrid\ui-bg_glass_1x400.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\jqgrid\ui-icons_256x240.png" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\sky_blue\bg.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\sort-asc.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\sort-desc.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\sort-view.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\images\white.gif" />
+    <Content Include="lib\jquery.bsgrid\builds\js\common.min.js" />
+    <Content Include="lib\jquery.bsgrid\builds\js\export.min.js" />
+    <Content Include="lib\jquery.bsgrid\builds\js\form.min.js" />
+    <Content Include="lib\jquery.bsgrid\builds\js\grid.extend.min.js" />
+    <Content Include="lib\jquery.bsgrid\builds\js\grid.min.js" />
+    <Content Include="lib\jquery.bsgrid\builds\js\grid.paging.min.js" />
+    <Content Include="lib\jquery.bsgrid\builds\js\lang\grid.en.min.js" />
+    <Content Include="lib\jquery.bsgrid\builds\js\lang\grid.zh-CN.min.js" />
+    <Content Include="lib\jquery.bsgrid\builds\js\lang\grid.zh-TW.min.js" />
+    <Content Include="lib\jquery.bsgrid\builds\js\util.min.js" />
+    <Content Include="lib\jquery.bsgrid\builds\merged\bsgrid.all.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\merged\bsgrid.all.min.js" />
+    <Content Include="lib\jquery.bsgrid\builds\merged\form.all.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\merged\form.all.min.js" />
+    <Content Include="lib\jquery.bsgrid\builds\merged\grid.all.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\merged\grid.all.min.js" />
+    <Content Include="lib\jquery.bsgrid\builds\merged\grid.simple.min.css" />
+    <Content Include="lib\jquery.bsgrid\builds\merged\grid.simple.min.js" />
+    <Content Include="lib\jquery.bsgrid\documention\documention.html" />
+    <Content Include="lib\jquery.bsgrid\documention\documention.zh-CN.html" />
+    <Content Include="lib\jquery.bsgrid\documention\feedback.html" />
+    <Content Include="lib\jquery.bsgrid\documention\images\donate\weixin.png" />
+    <Content Include="lib\jquery.bsgrid\documention\images\donate\zhifubao.jpg" />
+    <Content Include="lib\jquery.bsgrid\documention\images\pagination.jpg" />
+    <Content Include="lib\jquery.bsgrid\documention\images\simple.png" />
+    <Content Include="lib\jquery.bsgrid\documention\images\themes.jpg" />
+    <Content Include="lib\jquery.bsgrid\documention\source.html" />
+    <Content Include="lib\jquery.bsgrid\documention\themes.html" />
+    <Content Include="lib\jquery.bsgrid\donate.html" />
+    <Content Include="lib\jquery.bsgrid\examples\artDialog\grid.html" />
+    <Content Include="lib\jquery.bsgrid\examples\artDialog\gridAndForm.html" />
+    <Content Include="lib\jquery.bsgrid\examples\artDialog\override.grid.js" />
+    <Content Include="lib\jquery.bsgrid\examples\artDialog\override.pop.js" />
+    <Content Include="lib\jquery.bsgrid\examples\artDialog\override\artDialog.plugin.override.en.js" />
+    <Content Include="lib\jquery.bsgrid\examples\artDialog\override\artDialog.plugin.override.js" />
+    <Content Include="lib\jquery.bsgrid\examples\artDialog\override\artDialog.plugin.override.zh-CN.js" />
+    <Content Include="lib\jquery.bsgrid\examples\artDialog\override\artDialog.plugin.override.zh-TW.js" />
+    <Content Include="lib\jquery.bsgrid\examples\artDialog\override\artDialog.skins.override.css" />
+    <Content Include="lib\jquery.bsgrid\examples\artDialog\pop.html" />
+    <Content Include="lib\jquery.bsgrid\examples\bootstrap\grid.html" />
+    <Content Include="lib\jquery.bsgrid\examples\button\button.html" />
+    <Content Include="lib\jquery.bsgrid\examples\en.html" />
+    <Content Include="lib\jquery.bsgrid\examples\form\example.css" />
+    <Content Include="lib\jquery.bsgrid\examples\form\simple.html" />
+    <Content Include="lib\jquery.bsgrid\examples\form\standard.html" />
+    <Content Include="lib\jquery.bsgrid\examples\form\validation-ajax.html" />
+    <Content Include="lib\jquery.bsgrid\examples\form\validation.html" />
+    <Content Include="lib\jquery.bsgrid\examples\form\validationEngine-addition-rules.js" />
+    <Content Include="lib\jquery.bsgrid\examples\form\validationEngine\css\validationEngine.jquery.css" />
+    <Content Include="lib\jquery.bsgrid\examples\form\validationEngine\js\jquery.validationEngine.js" />
+    <Content Include="lib\jquery.bsgrid\examples\form\validationEngine\js\languages\jquery.validationEngine-en.js" />
+    <Content Include="lib\jquery.bsgrid\examples\form\validationEngine\js\languages\jquery.validationEngine-zh_CN.js" />
+    <Content Include="lib\jquery.bsgrid\examples\form\validationEngine\js\languages\jquery.validationEngine-zh_TW.js" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\checkbox-custom.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\checkbox-extend.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\data\simple.xml" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\data\userdata.xml" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\dynamic-header.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\edit-advanced.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\edit.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\event.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\export.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\extend.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\fixed-header\fixed-header-custom.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\fixed-header\fixed-header-extend.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\fixed-header\simple.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\foot.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\jsonp.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\load-time-test.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\local\json.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\local\xml.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\move-column-custom.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\move-column-extend.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\multi-extend.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\multi-header.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\multi-sort.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\multi.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\nested-json.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\no-data.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\no-display-blank-rows.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\no-pagation.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\paging.button.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\paging.little.button.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\paging.little.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\row-hover.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\search.en.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\search.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\select-row-event.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\simple-conditions.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\simple-fixed-width.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\simple-with-images.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\simple-xml.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\simple.en.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\simple.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\sort.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\standard.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\standard.zh-CN.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\stripe-row.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\themes\access.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\themes\blue.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\themes\bootstrap.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\themes\custom.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\themes\easyui.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\themes\flexigrid.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\themes\gray.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\themes\jqgrid.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\themes\pure_gray.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\themes\sky_blue.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\userdata-xml.html" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\userdata.html" />
+    <Content Include="lib\jquery.bsgrid\examples\html5\grid.html" />
+    <Content Include="lib\jquery.bsgrid\examples\images\1.jpg" />
+    <Content Include="lib\jquery.bsgrid\examples\images\2.jpg" />
+    <Content Include="lib\jquery.bsgrid\examples\images\3.jpg" />
+    <Content Include="lib\jquery.bsgrid\examples\images\image_loop-baidu_baijia-next_btn.png" />
+    <Content Include="lib\jquery.bsgrid\examples\images\image_loop-baidu_baijia-_prev_btn.png" />
+    <Content Include="lib\jquery.bsgrid\examples\images\image_loop-baidu_news.png" />
+    <Content Include="lib\jquery.bsgrid\examples\layui\laydate.html" />
+    <Content Include="lib\jquery.bsgrid\examples\layui\layer.html" />
+    <Content Include="lib\jquery.bsgrid\examples\layui\laypage-adapter.js" />
+    <Content Include="lib\jquery.bsgrid\examples\layui\laypage.html" />
+    <Content Include="lib\jquery.bsgrid\examples\loading2.gif" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPages\adapter.js" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPages\css\jPages.css" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPages\js\jPages.min.js" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPages\sample-adapter.html" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPages\sample.html" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginate\adapter.js" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginate\css\style.css" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginate\images\next.png" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginate\images\previous.png" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginate\images\snext.png" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginate\images\sprevious.png" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginate\js\jquery.paginate.js" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginate\sample-adapter.html" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginate\sample.html" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginator\adapter.js" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginator\css\jPaginator.css" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginator\img\btn_precedent.bmp" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginator\img\btn_precedent_max.bmp" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginator\img\btn_suivant.bmp" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginator\img\btn_suivant_max.bmp" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginator\js\jPaginator-min.js" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginator\js\jquery-ui-1.9.2.custom.min.js" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginator\sample-adapter.html" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginator\sample.css" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jPaginator\sample.html" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jqPagination\adapter.js" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jqPagination\css\jqpagination.css" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jqPagination\js\jquery.jqpagination.min.js" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jqPagination\sample-adapter.html" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jqPagination\sample.html" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jquery-1.6.4.min.js" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jquery-1.7.2.min.js" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jquery-1.8.3.min.js" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jquery_pagination\adapter.js" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jquery_pagination\css\pagination.css" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jquery_pagination\js\jquery.pagination.js" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jquery_pagination\sample-adapter.html" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\jquery_pagination\sample.html" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\smartpaginator\adapter.js" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\smartpaginator\css\smartpaginator.css" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\smartpaginator\js\smartpaginator.js" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\smartpaginator\sample-adapter.html" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\smartpaginator\sample.html" />
+    <Content Include="lib\jquery.bsgrid\examples\paging\image_loop-baidu_baijia.html" />
+    <Content Include="lib\jquery.bsgrid\examples\paging\image_loop-baidu_news.html" />
+    <Content Include="lib\jquery.bsgrid\examples\paging\least.html" />
+    <Content Include="lib\jquery.bsgrid\examples\paging\simple.html" />
+    <Content Include="lib\jquery.bsgrid\examples\paging\simple.little.html" />
+    <Content Include="lib\jquery.bsgrid\examples\test\dom-load.html" />
+    <Content Include="lib\jquery.bsgrid\examples\util\util.html" />
+    <Content Include="lib\jquery.bsgrid\examples\zh-CN.html" />
+    <Content Include="lib\jquery.bsgrid\index.html" />
+    <Content Include="lib\jquery.bsgrid\plugins\artDialog\artDialog.plugins.min.js" />
+    <Content Include="lib\jquery.bsgrid\plugins\artDialog\jquery.artDialog.min.js" />
+    <Content Include="lib\jquery.bsgrid\plugins\artDialog\skins\blue.css" />
+    <Content Include="lib\jquery.bsgrid\plugins\artDialog\skins\blue\bg.png" />
+    <Content Include="lib\jquery.bsgrid\plugins\artDialog\skins\blue\bg2.png" />
+    <Content Include="lib\jquery.bsgrid\plugins\artDialog\skins\blue\bg_css3.png" />
+    <Content Include="lib\jquery.bsgrid\plugins\artDialog\skins\blue\bg_css3_2.png" />
+    <Content Include="lib\jquery.bsgrid\plugins\artDialog\skins\loading.gif" />
+    <Content Include="lib\jquery.bsgrid\plugins\bootstrap\2.3.2\css\bootstrap-responsive.min.css" />
+    <Content Include="lib\jquery.bsgrid\plugins\bootstrap\2.3.2\css\bootstrap.min.css" />
+    <Content Include="lib\jquery.bsgrid\plugins\bootstrap\2.3.2\img\glyphicons-halflings-white.png" />
+    <Content Include="lib\jquery.bsgrid\plugins\bootstrap\2.3.2\img\glyphicons-halflings.png" />
+    <Content Include="lib\jquery.bsgrid\plugins\bootstrap\2.3.2\js\bootstrap.min.js" />
+    <Content Include="lib\jquery.bsgrid\plugins\html5shiv\html5shiv-printshiv.min.js" />
+    <Content Include="lib\jquery.bsgrid\plugins\html5shiv\html5shiv.min.js" />
+    <Content Include="lib\jquery.bsgrid\plugins\jquery-1.11.2.min.js" />
+    <Content Include="lib\jquery.bsgrid\plugins\jquery-1.4.4.min.js" />
+    <Content Include="lib\jquery.bsgrid\plugins\layui\laydate\laydate.js" />
+    <Content Include="lib\jquery.bsgrid\plugins\layui\laydate\need\laydate.css" />
+    <Content Include="lib\jquery.bsgrid\plugins\layui\laydate\skins\default\icon.png" />
+    <Content Include="lib\jquery.bsgrid\plugins\layui\laydate\skins\default\laydate.css" />
+    <Content Include="lib\jquery.bsgrid\plugins\layui\layer\extend\layer.ext.js" />
+    <Content Include="lib\jquery.bsgrid\plugins\layui\layer\layer.js" />
+    <Content Include="lib\jquery.bsgrid\plugins\layui\layer\skin\default\icon-ext.png" />
+    <Content Include="lib\jquery.bsgrid\plugins\layui\layer\skin\default\icon.png" />
+    <Content Include="lib\jquery.bsgrid\plugins\layui\layer\skin\default\loading-0.gif" />
+    <Content Include="lib\jquery.bsgrid\plugins\layui\layer\skin\default\loading-1.gif" />
+    <Content Include="lib\jquery.bsgrid\plugins\layui\layer\skin\default\loading-2.gif" />
+    <Content Include="lib\jquery.bsgrid\plugins\layui\layer\skin\layer.css" />
+    <Content Include="lib\jquery.bsgrid\plugins\layui\layer\skin\layer.ext.css" />
+    <Content Include="lib\jquery.bsgrid\plugins\layui\laypage\laypage.js" />
+    <Content Include="lib\jquery.bsgrid\plugins\layui\laypage\skin\laypage.css" />
+    <Content Include="lib\jquery.bsgrid\plugins\responsive-nav.js\demo\debut_dark.png" />
+    <Content Include="lib\jquery.bsgrid\plugins\responsive-nav.js\demo\debut_dark_%402X.png" />
+    <Content Include="lib\jquery.bsgrid\plugins\responsive-nav.js\demo\hamburger-retina.gif" />
+    <Content Include="lib\jquery.bsgrid\plugins\responsive-nav.js\demo\hamburger.gif" />
+    <Content Include="lib\jquery.bsgrid\plugins\responsive-nav.js\demo\styles.css" />
+    <Content Include="lib\jquery.bsgrid\plugins\responsive-nav.js\responsive-nav.css" />
+    <Content Include="lib\jquery.bsgrid\plugins\responsive-nav.js\responsive-nav.min.js" />
+    <Content Include="lib\jquery.bsgrid\plugins\sidemenu\arrowblue.gif" />
+    <Content Include="lib\jquery.bsgrid\plugins\sidemenu\arrowgray.gif" />
+    <Content Include="lib\jquery.bsgrid\plugins\sidemenu\arrowgreen.gif" />
+    <Content Include="lib\jquery.bsgrid\plugins\sidemenu\arrowsidemenu.css" />
+    <Content Include="lib\jquery.bsgrid\plugins\sidemenu\ddaccordion.js" />
+    <Content Include="lib\jquery.bsgrid\sources\copyright.txt" />
+    <Content Include="lib\jquery.bsgrid\sources\css\form.css" />
+    <Content Include="lib\jquery.bsgrid\sources\css\grid.css" />
+    <Content Include="lib\jquery.bsgrid\sources\css\grid.extend.css" />
+    <Content Include="lib\jquery.bsgrid\sources\css\grid.paging.css" />
+    <Content Include="lib\jquery.bsgrid\sources\css\icon.css" />
+    <Content Include="lib\jquery.bsgrid\sources\css\skins\grid_access.css" />
+    <Content Include="lib\jquery.bsgrid\sources\css\skins\grid_blue.css" />
+    <Content Include="lib\jquery.bsgrid\sources\css\skins\grid_bootstrap.css" />
+    <Content Include="lib\jquery.bsgrid\sources\css\skins\grid_easyui.css" />
+    <Content Include="lib\jquery.bsgrid\sources\css\skins\grid_flexigrid.css" />
+    <Content Include="lib\jquery.bsgrid\sources\css\skins\grid_gray.css" />
+    <Content Include="lib\jquery.bsgrid\sources\css\skins\grid_jqgrid.css" />
+    <Content Include="lib\jquery.bsgrid\sources\css\skins\grid_pure_gray.css" />
+    <Content Include="lib\jquery.bsgrid\sources\css\skins\grid_sky_blue.css" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\arrow-refresh.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\configure-2.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\dialog-accept-2.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\document-print-2.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\document-save-6.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\documentation.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\download.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\edit-copy-7.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\edit-cut-7.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\edit-delete-6.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\edit-delete-7.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\edit-find-8.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\edit-paste-7.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\flag.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\help-about-3.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\help.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\list-add-6.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\mail-generic.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\mimetypes\silk_style\page-white_acrobat.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\mimetypes\silk_style\page-white_excel.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\mimetypes\silk_style\page-white_text.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\mimetypes\silk_style\page-white_word.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\page-edit.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\paging\go-first-view.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\paging\go-jump-2.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\paging\go-last-view.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\paging\go-next-view.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\paging\go-previous-view.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\paging\view-refresh-3.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\sort-view.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\system-config-boot.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\system-search-6.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\view-list-details-5.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\view-sort-ascending-2.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\view-sort-descending-2.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\window-close-4.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\window-close.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\loading.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\access\bg.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\blue\bg.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\bootstrap\glyphicons-halflings.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\default\bg.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\easyui\bg.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\easyui\layout_button_right.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\easyui\pagination_first.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\easyui\pagination_last.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\easyui\pagination_load.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\easyui\pagination_next.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\easyui\pagination_prev.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\flexigrid\bg.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\gray\bg.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\jqgrid\ui-bg_glass_1x400.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\jqgrid\ui-icons_256x240.png" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\sky_blue\bg.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\sort-asc.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\sort-desc.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\sort-view.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\images\white.gif" />
+    <Content Include="lib\jquery.bsgrid\sources\js\common.js" />
+    <Content Include="lib\jquery.bsgrid\sources\js\export.js" />
+    <Content Include="lib\jquery.bsgrid\sources\js\form.js" />
+    <Content Include="lib\jquery.bsgrid\sources\js\grid.extend.js" />
+    <Content Include="lib\jquery.bsgrid\sources\js\grid.js" />
+    <Content Include="lib\jquery.bsgrid\sources\js\grid.paging.js" />
+    <Content Include="lib\jquery.bsgrid\sources\js\lang\grid.en.js" />
+    <Content Include="lib\jquery.bsgrid\sources\js\lang\grid.zh-CN.js" />
+    <Content Include="lib\jquery.bsgrid\sources\js\lang\grid.zh-TW.js" />
+    <Content Include="lib\jquery.bsgrid\sources\js\util.js" />
+    <Content Include="lib\layui\css\layui.css" />
+    <Content Include="lib\layui\css\layui.mobile.css" />
+    <Content Include="lib\layui\css\modules\code.css" />
+    <Content Include="lib\layui\css\modules\laydate\default\laydate.css" />
+    <Content Include="lib\layui\css\modules\layer\default\icon-ext.png" />
+    <Content Include="lib\layui\css\modules\layer\default\icon.png" />
+    <Content Include="lib\layui\css\modules\layer\default\layer.css" />
+    <Content Include="lib\layui\css\modules\layer\default\loading-0.gif" />
+    <Content Include="lib\layui\css\modules\layer\default\loading-1.gif" />
+    <Content Include="lib\layui\css\modules\layer\default\loading-2.gif" />
+    <Content Include="lib\layui\css\okmodules\jquery.contextMenu.css" />
+    <Content Include="lib\layui\css\okmodules\layx.min.css" />
+    <Content Include="lib\layui\css\okmodules\nprogress.css" />
+    <Content Include="lib\layui\css\okmodules\toastr.min.css" />
+    <Content Include="lib\layui\font\iconfont.svg" />
+    <Content Include="lib\layui\images\face\0.gif" />
+    <Content Include="lib\layui\images\face\1.gif" />
+    <Content Include="lib\layui\images\face\10.gif" />
+    <Content Include="lib\layui\images\face\11.gif" />
+    <Content Include="lib\layui\images\face\12.gif" />
+    <Content Include="lib\layui\images\face\13.gif" />
+    <Content Include="lib\layui\images\face\14.gif" />
+    <Content Include="lib\layui\images\face\15.gif" />
+    <Content Include="lib\layui\images\face\16.gif" />
+    <Content Include="lib\layui\images\face\17.gif" />
+    <Content Include="lib\layui\images\face\18.gif" />
+    <Content Include="lib\layui\images\face\19.gif" />
+    <Content Include="lib\layui\images\face\2.gif" />
+    <Content Include="lib\layui\images\face\20.gif" />
+    <Content Include="lib\layui\images\face\21.gif" />
+    <Content Include="lib\layui\images\face\22.gif" />
+    <Content Include="lib\layui\images\face\23.gif" />
+    <Content Include="lib\layui\images\face\24.gif" />
+    <Content Include="lib\layui\images\face\25.gif" />
+    <Content Include="lib\layui\images\face\26.gif" />
+    <Content Include="lib\layui\images\face\27.gif" />
+    <Content Include="lib\layui\images\face\28.gif" />
+    <Content Include="lib\layui\images\face\29.gif" />
+    <Content Include="lib\layui\images\face\3.gif" />
+    <Content Include="lib\layui\images\face\30.gif" />
+    <Content Include="lib\layui\images\face\31.gif" />
+    <Content Include="lib\layui\images\face\32.gif" />
+    <Content Include="lib\layui\images\face\33.gif" />
+    <Content Include="lib\layui\images\face\34.gif" />
+    <Content Include="lib\layui\images\face\35.gif" />
+    <Content Include="lib\layui\images\face\36.gif" />
+    <Content Include="lib\layui\images\face\37.gif" />
+    <Content Include="lib\layui\images\face\38.gif" />
+    <Content Include="lib\layui\images\face\39.gif" />
+    <Content Include="lib\layui\images\face\4.gif" />
+    <Content Include="lib\layui\images\face\40.gif" />
+    <Content Include="lib\layui\images\face\41.gif" />
+    <Content Include="lib\layui\images\face\42.gif" />
+    <Content Include="lib\layui\images\face\43.gif" />
+    <Content Include="lib\layui\images\face\44.gif" />
+    <Content Include="lib\layui\images\face\45.gif" />
+    <Content Include="lib\layui\images\face\46.gif" />
+    <Content Include="lib\layui\images\face\47.gif" />
+    <Content Include="lib\layui\images\face\48.gif" />
+    <Content Include="lib\layui\images\face\49.gif" />
+    <Content Include="lib\layui\images\face\5.gif" />
+    <Content Include="lib\layui\images\face\50.gif" />
+    <Content Include="lib\layui\images\face\51.gif" />
+    <Content Include="lib\layui\images\face\52.gif" />
+    <Content Include="lib\layui\images\face\53.gif" />
+    <Content Include="lib\layui\images\face\54.gif" />
+    <Content Include="lib\layui\images\face\55.gif" />
+    <Content Include="lib\layui\images\face\56.gif" />
+    <Content Include="lib\layui\images\face\57.gif" />
+    <Content Include="lib\layui\images\face\58.gif" />
+    <Content Include="lib\layui\images\face\59.gif" />
+    <Content Include="lib\layui\images\face\6.gif" />
+    <Content Include="lib\layui\images\face\60.gif" />
+    <Content Include="lib\layui\images\face\61.gif" />
+    <Content Include="lib\layui\images\face\62.gif" />
+    <Content Include="lib\layui\images\face\63.gif" />
+    <Content Include="lib\layui\images\face\64.gif" />
+    <Content Include="lib\layui\images\face\65.gif" />
+    <Content Include="lib\layui\images\face\66.gif" />
+    <Content Include="lib\layui\images\face\67.gif" />
+    <Content Include="lib\layui\images\face\68.gif" />
+    <Content Include="lib\layui\images\face\69.gif" />
+    <Content Include="lib\layui\images\face\7.gif" />
+    <Content Include="lib\layui\images\face\70.gif" />
+    <Content Include="lib\layui\images\face\71.gif" />
+    <Content Include="lib\layui\images\face\8.gif" />
+    <Content Include="lib\layui\images\face\9.gif" />
+    <Content Include="lib\layui\layui.all.js" />
+    <Content Include="lib\layui\layui.js" />
+    <Content Include="lib\layui\lay\modules\carousel.js" />
+    <Content Include="lib\layui\lay\modules\code.js" />
+    <Content Include="lib\layui\lay\modules\colorpicker.js" />
+    <Content Include="lib\layui\lay\modules\element.js" />
+    <Content Include="lib\layui\lay\modules\flow.js" />
+    <Content Include="lib\layui\lay\modules\form.js" />
+    <Content Include="lib\layui\lay\modules\jquery.js" />
+    <Content Include="lib\layui\lay\modules\laydate.js" />
+    <Content Include="lib\layui\lay\modules\layedit.js" />
+    <Content Include="lib\layui\lay\modules\layer.js" />
+    <Content Include="lib\layui\lay\modules\laypage.js" />
+    <Content Include="lib\layui\lay\modules\laytpl.js" />
+    <Content Include="lib\layui\lay\modules\mobile.js" />
+    <Content Include="lib\layui\lay\modules\rate.js" />
+    <Content Include="lib\layui\lay\modules\slider.js" />
+    <Content Include="lib\layui\lay\modules\table.js" />
+    <Content Include="lib\layui\lay\modules\transfer.js" />
+    <Content Include="lib\layui\lay\modules\tree.js" />
+    <Content Include="lib\layui\lay\modules\upload.js" />
+    <Content Include="lib\layui\lay\modules\util.js" />
+    <Content Include="lib\layui\lay\okmodules\okAddlink.js" />
+    <Content Include="lib\layui\lay\okmodules\okBarcode.js" />
+    <Content Include="lib\layui\lay\okmodules\okContextMenu.js" />
+    <Content Include="lib\layui\lay\okmodules\okCookie.js" />
+    <Content Include="lib\layui\lay\okmodules\okCountUp.js" />
+    <Content Include="lib\layui\lay\okmodules\okFly.js" />
+    <Content Include="lib\layui\lay\okmodules\okGVerify.js" />
+    <Content Include="lib\layui\lay\okmodules\okHoliday.js" />
+    <Content Include="lib\layui\lay\okmodules\okLayer.js" />
+    <Content Include="lib\layui\lay\okmodules\okLayx.js" />
+    <Content Include="lib\layui\lay\okmodules\okMd5.js" />
+    <Content Include="lib\layui\lay\okmodules\okMock.js" />
+    <Content Include="lib\layui\lay\okmodules\okNprogress.js" />
+    <Content Include="lib\layui\lay\okmodules\okQrcode.js" />
+    <Content Include="lib\layui\lay\okmodules\okSweetAlert2.js" />
+    <Content Include="lib\layui\lay\okmodules\okTab.js" />
+    <Content Include="lib\layui\lay\okmodules\okToastr.js" />
+    <Content Include="lib\layui\lay\okmodules\okUtils.js" />
+    <Content Include="lib\layui\lay\okmodules\qrcode.js" />
+    <Content Include="lib\loading\okLoading.css" />
+    <Content Include="lib\loading\okLoading.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="libman.json" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\CheckPermissionsAttribute.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WarmHomeAuthorizationFilter.cs" />
+    <Compile Include="App_Start\WarmHomeException.cs" />
+    <Compile Include="Controllers\AdminUserController.cs" />
+    <Compile Include="Controllers\CityController.cs" />
+    <Compile Include="Controllers\CommunityController.cs" />
+    <Compile Include="Controllers\HouseController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\PermissionController.cs" />
+    <Compile Include="Controllers\RegionController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdminUserAddModel.cs" />
+    <Compile Include="Models\AdminUserEditModel.cs" />
+    <Compile Include="Models\AdminUserEditViewModel.cs" />
+    <Compile Include="Models\CommunityEditModel.cs" />
+    <Compile Include="Models\HouseAddModel.cs" />
+    <Compile Include="Models\HouseAddViewModel.cs" />
+    <Compile Include="Models\HouseEditModel.cs" />
+    <Compile Include="Models\HouseEditViewModel.cs" />
+    <Compile Include="Models\HouseListModel.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\RegionViewModel.cs" />
+    <Compile Include="Models\RoleAddViewModel.cs" />
+    <Compile Include="Models\RoleEditViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="css\okadmin.theme.scss" />
+    <Content Include="lib\echarts\world\json\china-cities.json" />
+    <Content Include="lib\echarts\world\json\china-contour.json" />
+    <Content Include="lib\echarts\world\json\china.json" />
+    <Content Include="lib\echarts\world\json\optionMap.json" />
+    <Content Include="lib\echarts\world\json\province\anhui.json" />
+    <Content Include="lib\echarts\world\json\province\aomen.json" />
+    <Content Include="lib\echarts\world\json\province\beijing.json" />
+    <Content Include="lib\echarts\world\json\province\chongqing.json" />
+    <Content Include="lib\echarts\world\json\province\fujian.json" />
+    <Content Include="lib\echarts\world\json\province\gansu.json" />
+    <Content Include="lib\echarts\world\json\province\guangdong.json" />
+    <Content Include="lib\echarts\world\json\province\guangxi.json" />
+    <Content Include="lib\echarts\world\json\province\guizhou.json" />
+    <Content Include="lib\echarts\world\json\province\hainan.json" />
+    <Content Include="lib\echarts\world\json\province\hebei.json" />
+    <Content Include="lib\echarts\world\json\province\heilongjiang.json" />
+    <Content Include="lib\echarts\world\json\province\henan.json" />
+    <Content Include="lib\echarts\world\json\province\hubei.json" />
+    <Content Include="lib\echarts\world\json\province\hunan.json" />
+    <Content Include="lib\echarts\world\json\province\jiangsu.json" />
+    <Content Include="lib\echarts\world\json\province\jiangxi.json" />
+    <Content Include="lib\echarts\world\json\province\jilin.json" />
+    <Content Include="lib\echarts\world\json\province\liaoning.json" />
+    <Content Include="lib\echarts\world\json\province\neimenggu.json" />
+    <Content Include="lib\echarts\world\json\province\ningxia.json" />
+    <Content Include="lib\echarts\world\json\province\qinghai.json" />
+    <Content Include="lib\echarts\world\json\province\shandong.json" />
+    <Content Include="lib\echarts\world\json\province\shanghai.json" />
+    <Content Include="lib\echarts\world\json\province\shanxi.json" />
+    <Content Include="lib\echarts\world\json\province\shanxi1.json" />
+    <Content Include="lib\echarts\world\json\province\sichuan.json" />
+    <Content Include="lib\echarts\world\json\province\taiwan.json" />
+    <Content Include="lib\echarts\world\json\province\tianjin.json" />
+    <Content Include="lib\echarts\world\json\province\xianggang.json" />
+    <Content Include="lib\echarts\world\json\province\xinjiang.json" />
+    <Content Include="lib\echarts\world\json\province\xizang.json" />
+    <Content Include="lib\echarts\world\json\province\yunnan.json" />
+    <Content Include="lib\echarts\world\json\province\zhejiang.json" />
+    <Content Include="lib\echarts\world\json\world.json" />
+    <Content Include="lib\fonts\iconfont.eot" />
+    <Content Include="lib\fonts\iconfont.json" />
+    <Content Include="lib\fonts\iconfont.ttf" />
+    <Content Include="lib\fonts\iconfont.woff" />
+    <Content Include="lib\fonts\iconfont.woff2" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\mimetypes\silk_style\readme" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\paging\readme" />
+    <Content Include="lib\jquery.bsgrid\builds\images\icons\readme" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\access\readme" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\blue\readme" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\bootstrap\readme" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\easyui\readme" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\flexigrid\readme" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\gray\readme" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\jqgrid\readme" />
+    <Content Include="lib\jquery.bsgrid\builds\images\skins\sky_blue\readme" />
+    <Content Include="lib\jquery.bsgrid\builds\readme" />
+    <Content Include="lib\jquery.bsgrid\CHANGE-LOG" />
+    <Content Include="lib\jquery.bsgrid\examples\form\validation-ajax.json.jsp" />
+    <Content Include="lib\jquery.bsgrid\examples\form\validationEngine\readme" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\data\dynamic-header.jsp" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\data\json.jsp" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\data\nested.json" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\data\no-data.json" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\data\simple.json" />
+    <Content Include="lib\jquery.bsgrid\examples\grid\data\userdata.json" />
+    <Content Include="lib\jquery.bsgrid\examples\pagination\readme" />
+    <Content Include="lib\jquery.bsgrid\LICENSE" />
+    <Content Include="lib\jquery.bsgrid\plugins\artDialog\readme" />
+    <Content Include="lib\jquery.bsgrid\plugins\bootstrap\2.3.2\readme" />
+    <Content Include="lib\jquery.bsgrid\plugins\html5shiv\readme" />
+    <Content Include="lib\jquery.bsgrid\plugins\layui\readme" />
+    <Content Include="lib\jquery.bsgrid\plugins\responsive-nav.js\readme" />
+    <Content Include="lib\jquery.bsgrid\plugins\sidemenu\readme" />
+    <Content Include="lib\jquery.bsgrid\README.md" />
+    <Content Include="lib\jquery.bsgrid\sources\css\skins\readme" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\mimetypes\silk_style\readme" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\paging\readme" />
+    <Content Include="lib\jquery.bsgrid\sources\images\icons\readme" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\access\readme" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\blue\readme" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\bootstrap\readme" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\easyui\readme" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\flexigrid\readme" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\gray\readme" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\jqgrid\readme" />
+    <Content Include="lib\jquery.bsgrid\sources\images\skins\sky_blue\readme" />
+    <Content Include="lib\layui\font\iconfont.eot" />
+    <Content Include="lib\layui\font\iconfont.ttf" />
+    <Content Include="lib\layui\font\iconfont.woff" />
+    <Content Include="lib\layui\font\iconfont.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Main\Login.cshtml" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\Main\Index.cshtml" />
+    <Content Include="Views\Permission\List.cshtml" />
+    <Content Include="Views\Permission\_Layout.cshtml" />
+    <Content Include="Views\Permission\AddPermission.cshtml" />
+    <Content Include="Views\Permission\Edit.cshtml" />
+    <Content Include="Views\Role\_Layout.cshtml" />
+    <Content Include="Views\Role\List.cshtml" />
+    <Content Include="Views\Role\AddRole.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\AdminUser\_Layout.cshtml" />
+    <Content Include="Views\AdminUser\List.cshtml" />
+    <Content Include="Views\AdminUser\AddAdminUser.cshtml" />
+    <Content Include="Views\AdminUser\Edit.cshtml" />
+    <Content Include="Views\House\_Layout.cshtml" />
+    <Content Include="Views\House\List.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\House\AddHouse.cshtml" />
+    <Content Include="Views\House\Edit.cshtml" />
+    <Content Include="Views\City\List.cshtml" />
+    <Content Include="Views\City\AddCity.cshtml" />
+    <Content Include="Views\City\Edit.cshtml" />
+    <Content Include="Views\Region\List.cshtml" />
+    <Content Include="Views\Region\AddRegion.cshtml" />
+    <Content Include="Views\Region\Edit.cshtml" />
+    <Content Include="Views\Community\AddCommunity.cshtml" />
+    <Content Include="Views\Community\List.cshtml" />
+    <Content Include="Views\Community\Edit.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DB.ISerives\DB.IService.csproj">
+      <Project>{e5df47d5-8e5f-4f69-a2bd-e06a8e3480b3}</Project>
+      <Name>DB.IService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DB.Serives\DB.Service.csproj">
+      <Project>{3c44c16b-d33e-47d2-a631-96a2cc44d53f}</Project>
+      <Name>DB.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WarmHome.Common\WarmHome.Common.csproj">
+      <Project>{a717a466-ae67-4eca-89ca-3de15f2a7fcd}</Project>
+      <Name>WarmHome.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WarmHome.DTO\WarmHome.DTO.csproj">
+      <Project>{9b35e6bc-b495-4ab7-94f0-805fc895fd07}</Project>
+      <Name>WarmHome.DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2179</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:2179/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

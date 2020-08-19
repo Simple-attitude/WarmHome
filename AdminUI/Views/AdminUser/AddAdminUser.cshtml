@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "AddAdminUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="ok-body">
+    <!--form表单-->
+    <form class="layui-form layui-form-pane ok-form" id="formData">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" name="Name" placeholder="请输入用户名" autocomplete="off" class="layui-input"
+                       lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">手机号码</label>
+            <div class="layui-input-block">
+                <input type="text" id="phone" name="PhoneNum" placeholder="请输入手机号码" autocomplete="off" class="layui-input"
+                       lay-verify="required|phone">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-block">
+                <input type="text" name="Email" placeholder="请输入邮箱" autocomplete="off" class="layui-input"
+                       lay-verify="required|email">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="password" id="password" name="Password" placeholder="请输入密码" autocomplete="off" class="layui-input"
+                       lay-verify="required|password">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">确认密码</label>
+            <div class="layui-input-block">
+                <input type="password" lay-verify="required|comPassword" name="password" placeholder="请确认密码" autocomplete="off" id="comPassword" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">城市</label>
+            <div class="layui-input-block">
+                @Html.DropDownList("City", new SelectList(ViewBag.CityAll as IEnumerable<CityDTO>, nameof(CityDTO.Id), nameof(CityDTO.Name)));
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色</label>
+            <div class="layui-input-block">
+                @foreach (var item in ViewBag.RolesAll as IEnumerable<RoleDTO>)
+                {
+                    <input type="checkbox" name="Roles" title="@item.Name" value="@item.Id" id="Roles_@item.Id" />
+                }
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="add">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script>
+
+        layui.use(["element", "form", "laydate", "okLayer", "okUtils", "jquery"], function () {
+            let form = layui.form;
+            let laydate = layui.laydate;
+            let okLayer = layui.okLayer;
+            let okUtils = layui.okUtils;
+            let $ = layui.jquery;
+
+            okLoading.close();
+            laydate.render({ elem: "#birthday", type: "datetime" });
+
+            form.verify({
+                email: [/^[a-zA-Z0-9_-]+@@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/, "邮箱格式不正确"],
+                password: [/^[\S]{6,12}$/, "密码必须6到12位，且不能出现空格"],
+                phone: [
+                    /^[1][0-9]{10}$/,
+                    '输入的手机号格式不正确，请重新输入'
+                ],
+                comPassword: function (val) {
+                    let password = $("#password").val();
+                    return password == val ? '' : "两次密码不一致";
+                }
+            });
+
+            $("#phone").blur(function () {
+                var data = $(this).val();
+                $.ajax({
+                    url: "/AdminUser/CheckLoginPhoneNum", dataType: "json", type: "post", data: { phoneNum: data },
+                    success: function (data) {
+                        layer.msg(data.msg);
+                    },
+                    error: function (data) {
+                        layer.msg(data.msg);
+                    }
+                })
+
+            });
+
+            form.on("submit(add)", function (data) {
+                var formData = $("#formData").serializeArray();
+                okUtils.ajax("/AdminUser/AddAdminUser", "post", formData, true).done(function (response) {
+                    console.log(response);
+                    okLayer.greenTickMsg("添加成功", function () {
+                        parent.layer.close(parent.layer.getFrameIndex(window.name));
+                    });
+                }).fail(function (error) {
+                    console.log(error)
+                });
+                return false;
+            });
+        });
+    </script>
+}

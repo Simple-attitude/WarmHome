@@ -1,0 +1,66 @@
+﻿@model List<CityDTO>
+@{
+    ViewBag.Title = "AddRegion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="ok-body">
+    <!--form表单-->
+    <form class="layui-form layui-form-pane ok-form" id="formData">
+        <div class="layui-form-item">
+            <label class="layui-form-label">城市名</label>
+            <div class="layui-input-inline">
+                   @Html.DropDownList("cityId",new SelectList(Model,"Id","Name"))
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">小区名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" placeholder="请输入小区名" autocomplete="off" class="layui-input"
+                       lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="add">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+
+        layui.use(["element", "form", "tree", "okLayer", "okUtils",'jquery'], function () {
+            let form = layui.form;
+            let tree = layui.tree;
+            let okLayer = layui.okLayer;
+            let $ = layui.jquery;
+            let okUtils = layui.okUtils;
+            okLoading.close();
+
+
+            tree.render({
+                elem: "#permissionTree",
+                // data: okUtils.mockApi.permission.list,
+                //data: data,
+                showCheckbox: true
+            });
+            form.on("submit(add)", function (data) {
+                var formdata = $("#formData").serializeArray();
+                // TODO 权限节点校验
+
+                // 请求后台
+                okUtils.ajax("/Region/AddRegion", "post", formdata, true).done(function (response) {
+                    console.log(response);
+                    okLayer.greenTickMsg("添加成功", function () {
+                        parent.layer.close(parent.layer.getFrameIndex(window.name));
+                    });
+                }).fail(function (error) {
+                    console.log(error)
+                });
+                return false;
+            });
+        })
+    </script>
+}

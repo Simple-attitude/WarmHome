@@ -1,0 +1,217 @@
+﻿@model AdminUI.Models.HouseEditViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="ok-body">
+    <!--form表单-->
+    <form class="layui-form layui-form-pane ok-form" id="formData">
+        <input type="hidden" value="@Model.House.Id" name="id" />
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">区域</label>
+                <div class="layui-input-inline">
+                    @Html.DropDownList("RegionId", new SelectList(Model.Regions, "Id", "Name",Model.House.RegionId), new { lay_filter = "filter" })
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">小区</label>
+                <div class="layui-input-inline">
+                    <select id="communityId" name="CommunityId"></select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">房型</label>
+                <div class="layui-input-inline">
+                    @Html.DropDownList("RoomTypeId", new SelectList(Model.RoomTypes, "Id", "Name", Model.House.RoomTypeId))
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">地址</label>
+                <div class="layui-input-inline">
+                    <input type="text" value="@Model.House.Address" name="Address" placeholder="请输入用户名" autocomplete="off" class="layui-input"
+                           lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">租金</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="MonthRent" value="@Model.House.MonthRent" placeholder="请输入用户名" autocomplete="off" class="layui-input"
+                           lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">状态:</label>
+                <div class="layui-input-inline">
+                    @Html.DropDownList("StatusId", new SelectList(Model.Statuses, "Id", "Name", Model.House.StatusId))
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">面积</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="Area" value="@Model.House.Area" placeholder="请输入用户名" autocomplete="off" class="layui-input"
+                           lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">装修</label>
+                <div class="layui-input-inline">
+                    @Html.DropDownList("DecorateStatusId", new SelectList(Model.DecorateStatuses, "Id", "Name", Model.House.DecorateStatusId))
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">层数</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="FloorIndex" value="@Model.House.FloorIndex" placeholder="请输入用户名" autocomplete="off" class="layui-input"
+                           lay-verify="required">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">朝向:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="Direction" value="@Model.House.Direction" placeholder="请输入用户名" autocomplete="off" class="layui-input"
+                           lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">可看房时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="LookableDateTime" value="@Model.House.LookableDateTime" id="lookdate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">入住时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="CheckInDateTime"  value="@Model.House.CheckInDateTime" id="indate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">业主姓名:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="OwnerName" value="@Model.House.OwnerName" placeholder="请输入业主姓名" autocomplete="off" class="layui-input"
+                           lay-verify="required">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">业主电话:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="OwnerPhoneNum" value="@Model.House.OwnerPhoneNum" placeholder="请输入用户名" autocomplete="off" class="layui-input"
+                           lay-verify="required|phone">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">房屋类型</label>
+                <div class="layui-input-inline">
+                    @Html.DropDownList("TypeId", new SelectList(Model.Types, "Id", "Name", Model.House.TypeId))
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">房源描述</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容"  name="Description" class="layui-textarea">@Model.House.Description</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">配套设施</label>
+            <div class="layui-input-block">
+                @foreach (var item in Model.Attachments)
+                {
+                    <input type="checkbox" checked="@(Model.House.AttachmentIds.Contains(item.Id))" name="attachmentIds" title="@item.Name" value="@item.Id" id="Attachments_@item.Id" />
+                }
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="add">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script>
+
+        layui.use(["element", "form", "laydate", "okLayer", "okUtils", "jquery"], function () {
+            let form = layui.form;
+            let laydate = layui.laydate;
+            let okLayer = layui.okLayer;
+            let okUtils = layui.okUtils;
+
+            let $ = layui.jquery;
+            var regionData = function (data) {
+                //(function () {
+                $.ajax({
+                    url: "/House/LoadCommunities", dataType: "json", type: "post",
+                    data: { regionId: data.value },
+                    success: function (res) {
+                        if (res.code == 0) {
+                            $("#communityId").empty();
+                            for (var i = 0; i < res.count; i++) {
+                                var item = res.data[i];
+                                console.log(item);
+                                if(item.id=='@Model.House.CommunityId')
+                                {
+                                    $("<option value='" + item.id + "' selected='selected'>" + item.name + "</option>")
+                                                            .appendTo($("#communityId"));
+                                }
+                                else
+                                {
+                                    $("<option value='" + item.id + "'>" + item.name + "</option>")
+                                                            .appendTo($("#communityId"));
+                                }
+                                form.render();
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert("加载小区出错");
+                    }
+                })
+
+            };
+
+            form.on('select(filter)', regionData);
+            form.render('select');
+            okLoading.close();
+            laydate.render({ elem: "#birthday", type: "datetime" });
+            laydate.render(
+                {
+                    elem: '#lookdate'
+                });
+            laydate.render(
+                {
+                    elem: '#indate'
+                });
+            form.verify({
+                phone: [
+                    /^[1][0-9]{10}$/,
+                    '输入的手机号格式不正确，请重新输入'
+                ],
+            });
+            form.on("submit(add)", function (data) {
+                var formData = $("#formData").serializeArray();
+                okUtils.ajax("/House/Edit", "post", formData, true).done(function (response) {
+                    console.log(response);
+                    okLayer.greenTickMsg("编辑成功", function () {
+                        parent.layer.close(parent.layer.getFrameIndex(window.name));
+                    });
+                }).fail(function (error) {
+                    console.log(error)
+                });
+                return false;
+            });
+        });
+    </script>
+}

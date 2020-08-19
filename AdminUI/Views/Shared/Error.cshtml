@@ -1,0 +1,26 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $("#btnBack").click(function () {
+                window.history.back();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+    <h1>@Model</h1>
+        <button id="btnBack">返回上一页</button>
+    </div>
+</body>
+</html>

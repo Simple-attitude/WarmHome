@@ -7,7 +7,7 @@
 
 <div class="ok-body">
     <!--模糊搜索区域-->
-    <div class="layui-row">
+    @*<div class="layui-row">
         <form class="layui-form layui-col-md12 ok-search">
             <input class="layui-input" placeholder="开始日期" autocomplete="off" id="startTime" name="startTime">
             <input class="layui-input" placeholder="截止日期" autocomplete="off" id="endTime" name="endTime">
@@ -16,7 +16,7 @@
                 <i class="layui-icon layui-icon-search"></i>
             </button>
         </form>
-    </div>
+    </div>*@
     <!--数据表格-->
     <table class="layui-hide" id="tableId" lay-filter="tableFilter"></table>
 </div>
@@ -47,6 +47,9 @@
                     { field: "id", title: "ID", width: 80, sort: true },
                     { field: "name", title: "小区名称", width: 200 },
                     { field: "regionName", title: "所属区域", width: 200 },
+                    { field: "builtYear", title: "建造时间", width: 200 },
+                    { field: "location", title: "地址", width: 200 },
+                    { field: "traffic", title: "公交线路", width: 200 },
                     { field: "createDateTime", title: "创建时间", width: 200 },
                     { title: "操作", width: 100, align: "center", templet: "#operationTpl" }
                 ]],
@@ -129,7 +132,7 @@
     <script type="text/html" id="toolbarTpl">
         <div class="layui-btn-container">
             <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="batchDel">批量删除</button>
-            <button class="layui-btn layui-btn-sm" lay-event="add">添加用户</button>
+            <button class="layui-btn layui-btn-sm" lay-event="add">添加小区</button>
         </div>
     </script>
     <script type="text/html" id="operationTpl">

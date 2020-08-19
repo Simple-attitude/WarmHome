@@ -40,11 +40,11 @@ layui.use(["okUtils", "table", "okCountUp", "okMock"], function () {
     /**
      * 用户访问
      */
-    function userSource() {
-        var userSourceMap = echarts.init($("#userSourceMap")[0], "theme");
-        userSourceMap.setOption(userSourceOption);
-        okUtils.echartsResize([userSourceMap]);
-    }
+    //function userSource() {
+    //    var userSourceMap = echarts.init($("#userSourceMap")[0], "theme");
+    //    userSourceMap.setOption(userSourceOption);
+    //    okUtils.echartsResize([userSourceMap]);
+    //}
 
     /**
      * 所有用户
@@ -108,18 +108,18 @@ layui.use(["okUtils", "table", "okCountUp", "okMock"], function () {
     /**
      * 用户位置
      */
-    function userLocation() {
-        var userLocationMap = echarts.init($("#userLocationMap")[0]);
-        var data = [{"name":"北京","value":100},{"name":"天津","value":83},{"name":"上海","value":113},{"name":"重庆","value":188},{"name":"河北","value":197},{"name":"河南","value":327},{"name":"云南","value":371},{"name":"辽宁","value":224},{"name":"黑龙江","value":295},{"name":"湖南","value":463},{"name":"安徽","value":7},{"name":"山东","value":176},{"name":"新疆","value":0},{"name":"江苏","value":396},{"name":"浙江","value":472},{"name":"江西","value":243},{"name":"湖北","value":226},{"name":"广西","value":404},{"name":"甘肃","value":210},{"name":"山西","value":451},{"name":"内蒙古","value":97},{"name":"陕西","value":369},{"name":"吉林","value":221},{"name":"福建","value":216},{"name":"贵州","value":221},{"name":"广东","value":85},{"name":"青海","value":21},{"name":"西藏","value":414},{"name":"四川","value":380},{"name":"宁夏","value":205},{"name":"海南","value":73},{"name":"台湾","value":348},{"name":"香港","value":54},{"name":"澳门","value":340}];
-        userLocationOption.series.data = data;
-        userLocationMap.setOption(userLocationOption);
-        okUtils.echartsResize([userLocationMap]);
-    }
+    //function userLocation() {
+    //    var userLocationMap = echarts.init($("#userLocationMap")[0]);
+    //    var data = [{"name":"北京","value":100},{"name":"天津","value":83},{"name":"上海","value":113},{"name":"重庆","value":188},{"name":"河北","value":197},{"name":"河南","value":327},{"name":"云南","value":371},{"name":"辽宁","value":224},{"name":"黑龙江","value":295},{"name":"湖南","value":463},{"name":"安徽","value":7},{"name":"山东","value":176},{"name":"新疆","value":0},{"name":"江苏","value":396},{"name":"浙江","value":472},{"name":"江西","value":243},{"name":"湖北","value":226},{"name":"广西","value":404},{"name":"甘肃","value":210},{"name":"山西","value":451},{"name":"内蒙古","value":97},{"name":"陕西","value":369},{"name":"吉林","value":221},{"name":"福建","value":216},{"name":"贵州","value":221},{"name":"广东","value":85},{"name":"青海","value":21},{"name":"西藏","value":414},{"name":"四川","value":380},{"name":"宁夏","value":205},{"name":"海南","value":73},{"name":"台湾","value":348},{"name":"香港","value":54},{"name":"澳门","value":340}];
+    //    userLocationOption.series.data = data;
+    //    userLocationMap.setOption(userLocationOption);
+    //    okUtils.echartsResize([userLocationMap]);
+    //}
 
     statText();
-    userSource();
+    //userSource();
     userList();
-    userLocation();
+    //userLocation();
 });
 
 

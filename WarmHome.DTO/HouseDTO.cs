@@ -27,8 +27,8 @@ namespace WarmHome.DTO
         public long DecorateStatusId { get; set; }
         public string DecorateStatusName { get; set; }
         public int TotalFloorCount { get; set; }
-        public int FloorIndex { get; set; }
-    public long TypeId { get; set; }
+        public int FloorIndex { get; set; } 
+        public long TypeId { get; set; }
         public string TypeName { get; set; }
         public string Direction { get; set; }
         public DateTime LookableDateTime { get; set; }

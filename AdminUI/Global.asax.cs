@@ -32,6 +32,7 @@ namespace AdminUI
             GlobalFilters.Filters.Add(new JsonNetActionFilter());
             GlobalFilters.Filters.Add(new WarmHomeException());
             GlobalFilters.Filters.Add(new WarmHomeAuthorizationFilter());
+            GlobalFilters.Filters.Add(new CustomHandleErrorAttribute());
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }

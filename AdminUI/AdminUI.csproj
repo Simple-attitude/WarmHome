@@ -132,6 +132,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="css\common.css" />
+    <Content Include="css\error.css" />
     <Content Include="css\gulpfile.js" />
     <Content Include="css\okadmin.animate.css" />
     <Content Include="css\okadmin.css" />
@@ -735,12 +736,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\CheckPermissionsAttribute.cs" />
+    <Compile Include="App_Start\CustomHandleErrorAttribute.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WarmHomeAuthorizationFilter.cs" />
     <Compile Include="App_Start\WarmHomeException.cs" />
     <Compile Include="Controllers\AdminUserController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\CommunityController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HouseController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\PermissionController.cs" />
@@ -753,6 +756,7 @@
     <Compile Include="Models\AdminUserEditModel.cs" />
     <Compile Include="Models\AdminUserEditViewModel.cs" />
     <Compile Include="Models\CommunityEditModel.cs" />
+    <Compile Include="Models\GetMainConsole.cs" />
     <Compile Include="Models\HouseAddModel.cs" />
     <Compile Include="Models\HouseAddViewModel.cs" />
     <Compile Include="Models\HouseEditModel.cs" />
@@ -898,6 +902,9 @@
     <Content Include="Views\Community\AddCommunity.cshtml" />
     <Content Include="Views\Community\List.cshtml" />
     <Content Include="Views\Community\Edit.cshtml" />
+    <Content Include="Views\Main\Console.cshtml" />
+    <Content Include="Views\Error\PageNotFound.cshtml" />
+    <Content Include="Views\Error\HttpError500.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

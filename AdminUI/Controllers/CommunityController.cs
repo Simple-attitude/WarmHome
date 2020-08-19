@@ -1,11 +1,10 @@
-﻿using AdminUI.Models;
+﻿using AdminUI.App_Start;
+using AdminUI.Models;
 using DB.ISerives;
 using DB.IService;
 using log4net;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WarmHome.Common;
 using WarmHome.DTO;
@@ -14,18 +13,22 @@ namespace AdminUI.Controllers
 {
     public class CommunityController : Controller
     {
-        public ICommunityService  CommunityService { get; set; }
+        public ICommunityService CommunityService { get; set; }
         public IRegionService RegionService { get; set; }
         public ICityService CityService { get; set; }
         public IAdminUserService AdminUserService { get; set; }
         public ILog Log = LogManager.GetLogger(nameof(CommunityService));
+
         // GET: Community
+        [CheckPermissions("Community.List")]
         public ActionResult List()
         {
             return View();
         }
+
         [HttpPost]
-        public ActionResult ListData(int page,int limit)
+        [CheckPermissions("Community.List")]
+        public ActionResult ListData(int page, int limit)
         {
             var count = CommunityService.GetAll();
             var data = count.Skip((page - 1) * limit).Take(limit);
@@ -36,19 +39,25 @@ namespace AdminUI.Controllers
                 data = data
             });
         }
+
         [HttpGet]
+        [CheckPermissions("Community.List")]
+        [CheckPermissions("Community.Add")]
         public ActionResult AddCommunity()
         {
             var userId = AdminHelper.AdminUserId(HttpContext);
             var cityId = AdminUserService.GetById(userId.Value).CityId;
-            if (cityId==null)
+            if (cityId == null)
             {
                 return View("Error", (object)"总部不能添加地区");
             }
             var data = RegionService.GetCityAll((long)cityId);
             return View(data);
         }
+
         [HttpPost]
+        [CheckPermissions("Community.List")]
+        [CheckPermissions("Community.Add")]
         public ActionResult AddCommunity(CommunityDTO community)
         {
             CommunityService.AddCommunity(community);
@@ -58,10 +67,13 @@ namespace AdminUI.Controllers
                 msg = "添加成功"
             });
         }
+
         [HttpGet]
+        [CheckPermissions("Community.List")]
+        [CheckPermissions("Community.Edit")]
         public ActionResult Edit(long id)
         {
-            var data= CommunityService.GetById(id);
+            var data = CommunityService.GetById(id);
             var userId = AdminHelper.AdminUserId(HttpContext);
             var cityId = AdminUserService.GetById(userId.Value).CityId;
             if (cityId == null)
@@ -75,7 +87,10 @@ namespace AdminUI.Controllers
             };
             return View(model);
         }
+
         [HttpPost]
+        [CheckPermissions("Community.List")]
+        [CheckPermissions("Community.Edit")]
         public ActionResult Edit(CommunityDTO community)
         {
             try
@@ -96,8 +111,10 @@ namespace AdminUI.Controllers
                     msg = "编辑失败"
                 });
             }
-
         }
+
+        [CheckPermissions("Community.List")]
+        [CheckPermissions("Community.Deleted")]
         public ActionResult Deleted(long id)
         {
             try
@@ -119,6 +136,9 @@ namespace AdminUI.Controllers
                 });
             }
         }
+
+        [CheckPermissions("Community.List")]
+        [CheckPermissions("Community.Deleted")]
         public ActionResult Deleted(string idsStr)
         {
             try

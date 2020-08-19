@@ -6,7 +6,7 @@
 
 <div class="ok-body">
     <!--模糊搜索区域-->
-    <div class="layui-row">
+    @*<div class="layui-row">
         <form class="layui-form layui-col-md12 ok-search">
             <input class="layui-input" placeholder="开始日期" autocomplete="off" id="startTime" name="startTime">
             <input class="layui-input" placeholder="截止日期" autocomplete="off" id="endTime" name="endTime">
@@ -15,7 +15,7 @@
                 <i class="layui-icon layui-icon-search"></i>
             </button>
         </form>
-    </div>
+    </div>*@
     <!--数据表格-->
     <table class="layui-hide" id="tableId" lay-filter="tableFilter"></table>
 </div>
@@ -127,7 +127,7 @@
     <script type="text/html" id="toolbarTpl">
         <div class="layui-btn-container">
             <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="batchDel">批量删除</button>
-            <button class="layui-btn layui-btn-sm" lay-event="add">添加用户</button>
+            <button class="layui-btn layui-btn-sm" lay-event="add">添加城市</button>
         </div>
     </script>
     <script type="text/html" id="operationTpl">

@@ -1,9 +1,8 @@
-﻿using DB.IService;
+﻿using AdminUI.App_Start;
+using DB.IService;
 using log4net;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WarmHome.Common;
 using WarmHome.DTO;
@@ -12,15 +11,19 @@ namespace AdminUI.Controllers
 {
     public class CityController : Controller
     {
-        public ICityService  CityService { get; set; }
+        public ICityService CityService { get; set; }
         public ILog Log = LogManager.GetLogger(nameof(CityController));
+
         // GET: City
+        [CheckPermissions("City.List")]
         public ActionResult List()
         {
             return View();
         }
+
         [HttpPost]
-        public ActionResult ListData(int page,int limit)
+        [CheckPermissions("City.List")]
+        public ActionResult ListData(int page, int limit)
         {
             var count = CityService.GetAll();
             var data = count.Skip((page - 1) * limit).Take(limit);
@@ -30,8 +33,11 @@ namespace AdminUI.Controllers
                 msg = "查询成功",
                 data = data,
                 count = count.Count()
-            }) ;
+            });
         }
+
+        [CheckPermissions("City.List")]
+        [CheckPermissions("City.Add")]
         [HttpPost]
         public ActionResult AddCity(string name)
         {
@@ -54,18 +60,28 @@ namespace AdminUI.Controllers
                 });
             }
         }
+
         [HttpGet]
-        public ActionResult AddCity() {
-            return View(); 
+        [CheckPermissions("City.List")]
+        [CheckPermissions("City.Add")]
+        public ActionResult AddCity()
+        {
+            return View();
         }
+
         [HttpGet]
+        [CheckPermissions("City.List")]
+        [CheckPermissions("City.Edit")]
         public ActionResult Edit(long id)
         {
             var city = CityService.GetById(id);
             return View(city);
         }
+
         [HttpPost]
-        public ActionResult Edit(long id,string name)
+        [CheckPermissions("City.List")]
+        [CheckPermissions("City.Edit")]
+        public ActionResult Edit(long id, string name)
         {
             try
             {
@@ -74,7 +90,7 @@ namespace AdminUI.Controllers
                 {
                     code = 0,
                     msg = "编辑成功"
-                }) ;
+                });
             }
             catch (Exception ex)
             {
@@ -86,6 +102,9 @@ namespace AdminUI.Controllers
                 });
             }
         }
+
+        [CheckPermissions("City.List")]
+        [CheckPermissions("City.Deleted")]
         public ActionResult Deleted(long id)
         {
             try
@@ -107,7 +126,10 @@ namespace AdminUI.Controllers
                 });
             }
         }
+
         [HttpPost]
+        [CheckPermissions("City.List")]
+        [CheckPermissions("City.Deleted")]
         public ActionResult ManyDeleted(string idsStr)
         {
             try
@@ -121,7 +143,6 @@ namespace AdminUI.Controllers
                 {
                     code = 0,
                     msg = "删除成功"
-
                 });
             }
             catch (Exception ex)

@@ -22,7 +22,7 @@ namespace AdminUI.Controllers
             return View();
         }
         //[HttpPost]
-        [HttpGet]
+        [HttpPost]
         [CheckPermissions("Permission.List")]
         public ActionResult ListData(int page, int limit)
         {

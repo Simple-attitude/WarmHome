@@ -5,7 +5,7 @@
 
 <div class="ok-body">
     <!--模糊搜索区域-->
-    <div class="layui-row">
+    @*<div class="layui-row">
         <form class="layui-form layui-col-md12 ok-search">
             <input class="layui-input" placeholder="开始日期" autocomplete="off" id="startTime" name="startTime">
             <input class="layui-input" placeholder="截止日期" autocomplete="off" id="endTime" name="endTime">
@@ -14,7 +14,7 @@
                 <i class="layui-icon layui-icon-search"></i>
             </button>
         </form>
-    </div>
+    </div>*@
     <!--数据表格-->
     <table class="layui-hide" id="tableId" lay-filter="tableFilter"></table>
 </div>
@@ -57,7 +57,7 @@
             let permissionTable = table.render({
                 elem: "#tableId",
                 url: "/Permission/ListData",
-                //method: 'post',
+                method: 'post',
                 limit: 10,
                 page: true,
                 even: true,
@@ -69,11 +69,10 @@
                     { field: "name", title: "权限项名称", width: 100 },
                     { field: "description", title: "备注", width: 100 },
                     { field: "createDateTime", title: "创建时间", width: 150 },
-                    { title: "操作", width: 80, align: "center", templet: "#operationTpl" },
-                    { title: "操作", width: 100, align: "center", fixed: "right", templet: "#operationTpl" }
+					{ title: "操作", width: 100, align: "center", fixed: "right", templet: "#operationTpl" }
                 ]],
                 done: function (res, curr, count) {
-                    console.log(res, curr, count)
+                    //console.log(res, curr, count)
                 }
             });
 
@@ -110,7 +109,7 @@
             });
 
             function add() {
-                okLayer.open("添加角色", "/Permission/AddPermission", "90%", "90%", null, function () {
+                okLayer.open("添加权限项", "/Permission/AddPermission", "90%", "90%", null, function () {
                     permissionTable.reload();
                 })
             }
@@ -151,7 +150,7 @@
     <script type="text/html" id="toolbarTpl">
         <div class="layui-btn-container">
             <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="batchDel">批量删除</button>
-            <button class="layui-btn layui-btn-sm" lay-event="add">添加用户</button>
+            <button class="layui-btn layui-btn-sm" lay-event="add">添加权限项</button>
         </div>
     </script>
     <script type="text/html" id="operationTpl">

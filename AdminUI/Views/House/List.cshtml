@@ -8,12 +8,12 @@
     <!--模糊搜索区域-->
     <div class="layui-row">
         <form class="layui-form layui-col-md12 ok-search">
-            <input class="layui-input" placeholder="开始日期" autocomplete="off" id="startTime" name="startTime">
+            @*<input class="layui-input" placeholder="开始日期" autocomplete="off" id="startTime" name="startTime">
             <input class="layui-input" placeholder="截止日期" autocomplete="off" id="endTime" name="endTime">
             <input class="layui-input" placeholder="账号" autocomplete="off" name="username">
             <button class="layui-btn" lay-submit="" lay-filter="search">
                 <i class="layui-icon">&#xe615;</i>
-            </button>
+            </button>*@
             <input type="hidden" value="@Model.CityId" name="cityId" />
             <input type="hidden" value="@Model.TypeId" name="typeId" />
         </form>
@@ -52,6 +52,7 @@
                 { field: "regionName", title: "区域", width: 100},
                 { field: "communityName", title: "小区名", width: 100},
                 { field: "communityLocation", title: "地段", width: 100},
+                { field: "address", title: "地址", width: 100 },
                 { field: "monthRent", title: "租金", width: 100},
                 { field: "roomTypeName", title: "房型", width: 100, templet: "#roleTpl"},
 				{ field: "area", title: "面积", width: 200 },
@@ -60,8 +61,9 @@
 				{title: "操作", width: 100, align: "center", fixed: "right", templet: "#operationTpl"}
 			]],
 			done: function (res, curr, count) {
-				console.info(res, curr, count);
-                console.log(cityId);
+				//console.info(res, curr, count);
+    //            console.log(cityId);
+				console.log("加载成功");
 			}
 		});
 
